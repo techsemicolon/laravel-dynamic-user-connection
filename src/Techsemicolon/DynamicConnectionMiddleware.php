@@ -51,7 +51,7 @@ class DynamicConnectionMiddleware
                         }
                     }
                     catch(DecryptException $e){
-                        throw new DynamicConnectionInvalidPasswordException($e);
+                        throw new DynamicConnectionInvalidPasswordException('The payload provider for user password is invalid');
                     }
 
                     // Update config

@@ -15,6 +15,14 @@ Then add `DynamicConnectionServiceProvider` entry in `config/app.php`'s `provide
 Techsemicolon\DynamicConnection\DynamicConnectionServiceProvider::class,
 ~~~
 
+
+## How it works : 
+
+You should have basic mysql database collection which has `users` table. Basic login authentication will work from there as usual. 
+
+The package comes into picture once user is logged in, and switches the database as per applicable settings in `App\User.php` model.
+
+
 ## Usage :
 
 The package expects you to save these details in `users` table. What package needs is the column name where the information for dynamic user connection is stored.
