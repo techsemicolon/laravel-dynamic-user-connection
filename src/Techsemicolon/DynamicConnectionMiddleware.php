@@ -3,7 +3,9 @@
 namespace Techsemicolon\DynamicConnection;
 
 use Closure;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Techsemicolon\DynamicConnection\DynamicConnectionFailedException;
+use Techsemicolon\DynamicConnection\DynamicConnectionInvalidPasswordException;
 
 class DynamicConnectionMiddleware
 {
@@ -40,10 +42,16 @@ class DynamicConnectionMiddleware
                         $config['username'] = $user->{$user->dynamic_connection_username};
                     }
 
-                    // Set new password if applicable
-                    if(property_exists($user, 'dynamic_connection_password')){
+                    try{
 
-                        $config['password'] = $user->{$user->dynamic_connection_password};
+                        // Set new password if applicable
+                        if(property_exists($user, 'dynamic_connection_password')){
+
+                            $config['password'] = decrypt($user->{$user->dynamic_connection_password});
+                        }
+                    }
+                    catch(DecryptException $e){
+                        throw new DynamicConnectionInvalidPasswordException($e);
                     }
 
                     // Update config
