@@ -93,4 +93,4 @@ If password is not encryptable then package throws `DynamicConnectionInvalidPass
 
 ## License : 
 
-This DOMPDF Wrapper for Laravel is open-sourced software licensed under the MIT license
+This package is open-sourced software licensed under the MIT license
